@@ -1,85 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Be My Valentine?</title>
+    <title>Will You Be My Valentine?</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #fce4ec;
-            text-align: center;
-            color: #333;
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        header {
-            padding: 50px 20px;
-            background-color: #ff69b4;
+        /* Full Page Layout */
+        body, html {
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ffe6f2;
+        }
+
+        /* Dynamic Background */
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 182, 193, 0.8), rgba(255, 0, 150, 0.9));
+            animation: backgroundMove 10s ease-in-out infinite;
+        }
+
+        /* Keyframe Animation for Background */
+        @keyframes backgroundMove {
+            0% {
+                background: radial-gradient(circle, rgba(255, 182, 193, 0.8), rgba(255, 0, 150, 0.9));
+            }
+            50% {
+                background: radial-gradient(circle, rgba(255, 200, 200, 0.8), rgba(255, 0, 200, 0.9));
+            }
+            100% {
+                background: radial-gradient(circle, rgba(255, 182, 193, 0.8), rgba(255, 0, 150, 0.9));
+            }
+        }
+
+        /* Content Area */
+        .content {
+            text-align: center;
+            z-index: 10;
             color: white;
-            border-bottom: 5px solid #d81b60;
+            position: relative;
+            padding: 20px;
         }
 
         h1 {
-            font-size: 3em;
-            margin: 0;
+            font-size: 3rem;
+            animation: fadeIn 3s ease-out;
         }
 
-        .content {
-            margin: 40px;
-        }
-
-        .content img {
-            width: 80%;
-            border-radius: 15px;
-            margin-bottom: 30px;
-        }
-
-        .question {
-            font-size: 2em;
+        p {
+            font-size: 1.5rem;
             margin-top: 20px;
-            font-weight: bold;
-            color: #d81b60;
+            animation: fadeIn 3s ease-out;
         }
 
-        .yes-button {
-            padding: 15px 30px;
-            background-color: #ff69b4;
-            border: none;
+        /* Interactive Button */
+        .btn {
+            display: inline-block;
+            background: #ff4d94;
             color: white;
-            font-size: 1.5em;
+            padding: 15px 25px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            text-decoration: none;
             cursor: pointer;
-            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+            margin-top: 30px;
         }
 
-        .yes-button:hover {
-            background-color: #f06292;
+        /* Button Hover Effect */
+        .btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
+            background: #ff1a6c;
+        }
+
+        /* Text Fade-In Animation */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Heart Animation */
+        .heart {
+            font-size: 3rem;
+            color: #ff4d94;
+            margin-top: 50px;
+            animation: pulse 1s ease-out infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+        }
+
+        /* Modal Popup */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .modal-content {
+            background: white;
+            color: black;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .modal-content h2 {
+            font-size: 2rem;
+        }
+
+        .close-btn {
+            padding: 10px 15px;
+            background: #ff4d94;
+            color: white;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: #ff1a6c;
         }
     </style>
 </head>
-
 <body>
 
-    <header>
-        <h1>To My Dearest [Her Name]</h1>
-    </header>
+<!-- Dynamic Background -->
+<div class="background"></div>
 
-    <div class="content">
-        <img src="your-photo.jpg" alt="Picture of us" />
-        <p>Every moment with you has been a dream come true, and I can't imagine my life without you.</p>
+<!-- Main Content -->
+<div class="content">
+    <h1>To My Dearest [Her Name]</h1>
+    <p>Every moment with you is magical. Will you be my Valentine?</p>
+    <a href="#" class="btn" onclick="showModal()">Yes! 💖</a>
+    <div class="heart">❤️</div>
+</div>
 
-        <p class="question">Will you be my Valentine forever?</p>
-
-        <button class="yes-button" onclick="showMessage()">Yes!</button>
+<!-- Modal -->
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <h2>I love you so much! 💖</h2>
+        <p>You are my everything. Thank you for being my Valentine forever.</p>
+        <button class="close-btn" onclick="closeModal()">Close</button>
     </div>
+</div>
 
-    <script>
-        function showMessage() {
-            alert("I love you so much! 💖 You're my everything.");
-            window.location.href = "https://your-dinner-or-surprise-link.com"; // Optional: Link to surprise event or dinner
-        }
-    </script>
+<script>
+    // Show modal on button click
+    function showModal() {
+        document.getElementById("modal").style.display = "flex";
+    }
+
+    // Close modal
+    function closeModal() {
+        document.getElementById("modal").style.display = "none";
+    }
+</script>
 
 </body>
-
 </html>
